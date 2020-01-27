@@ -35,7 +35,7 @@ public class App extends JFrame {
         tfAddEatingPersons.setColumns(20);
 
         JButton btnAddName = new JButton("Hinzufügen");
-        btnAddName.setBounds(255, 35, 100, 30);
+        btnAddName.setBounds(305, 35, 100, 30);
         background.add(btnAddName);
 
         JLabel lblEatingPersons = new JLabel("Essende Supporter:");
@@ -48,11 +48,11 @@ public class App extends JFrame {
         tfEatingPersons.setColumns(20);
 
         JButton btnDeleteSingleEatingPerson = new JButton("Namen löschen");
-        btnDeleteSingleEatingPerson.setBounds(15, 415, 130, 30);
+        btnDeleteSingleEatingPerson.setBounds(50, 415, 130, 30);
         background.add(btnDeleteSingleEatingPerson);
 
         JButton btnDeleteAllEatingPersons = new JButton("Alle löschen");
-        btnDeleteAllEatingPersons.setBounds(15, 450, 100, 30);
+        btnDeleteAllEatingPersons.setBounds(65, 450, 100, 30);
         background.add(btnDeleteAllEatingPersons);
 
         JLabel lblStoredDishWashers = new JLabel("War schon mal dran:");
@@ -65,11 +65,11 @@ public class App extends JFrame {
         tfEatingPersons.setColumns(20);
 
         JButton btnDeleteSingleStored = new JButton("Namen löschen");
-        btnDeleteSingleStored.setBounds(255, 415, 130, 30);
+        btnDeleteSingleStored.setBounds(290, 415, 130, 30);
         background.add(btnDeleteSingleStored);
 
         JButton btnDeleteAllStored = new JButton("Alle löschen");
-        btnDeleteAllStored.setBounds(255, 450, 100, 30);
+        btnDeleteAllStored.setBounds(305, 450, 100, 30);
         background.add(btnDeleteAllStored);
 
         JButton btnCrownWinner = new JButton("Gewinner bestimmen");
