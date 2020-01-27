@@ -10,8 +10,9 @@ public class App extends JFrame {
 
     private JPanel background;
     private JTextField tfAddEatingPersons;
-    private JTextField tfEatingPersons;
-    private JTextField tfStoredDishwashers;
+
+    private JScrollPane sPEatingPersons;
+    private JScrollPane sPStoredDishwashers;
 
     private JButton addName;
 
@@ -42,10 +43,9 @@ public class App extends JFrame {
         lblEatingPersons.setBounds(15, 90, 150, 15);
         background.add(lblEatingPersons);
 
-        tfEatingPersons = new JTextField();
-        tfEatingPersons.setBounds(15, 110, 200, 300);
-        background.add(tfEatingPersons);
-        tfEatingPersons.setColumns(20);
+        sPEatingPersons = new JScrollPane();
+        sPEatingPersons.setBounds(15, 110, 200, 300);
+        background.add(sPEatingPersons);
 
         JButton btnDeleteSingleEatingPerson = new JButton("Einzelne Person löschen");
         btnDeleteSingleEatingPerson.setBounds(25, 415, 180, 30);
@@ -55,10 +55,9 @@ public class App extends JFrame {
         lblStoredDishWashers.setBounds(255, 90, 150, 15);
         background.add(lblStoredDishWashers);
         
-        tfStoredDishwashers = new JTextField();
-        tfStoredDishwashers.setBounds(255, 110, 200, 300);
-        background.add(tfStoredDishwashers);
-        tfEatingPersons.setColumns(20);
+        sPStoredDishwashers = new JScrollPane();
+        sPStoredDishwashers.setBounds(255, 110, 200, 300);
+        background.add(sPStoredDishwashers);
 
         JButton btnDeleteAllStored = new JButton("Liste leeren");
         btnDeleteAllStored.setBounds(305, 415, 100, 30);
