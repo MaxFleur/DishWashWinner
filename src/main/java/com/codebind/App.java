@@ -6,13 +6,20 @@
 
 package com.codebind;
 
-import javax.swing.*;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.UIManager;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+import java.awt.EventQueue;
+
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import com.codebind.EatingPersonsHandler;
 
 /**
  * This class handles the GUI buildup and runs the main app.
