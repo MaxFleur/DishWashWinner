@@ -34,6 +34,7 @@ public class App extends JFrame {
     private JScrollPane sPStoredDishwashers;
 
     private EatingPersonsHandler m_ePH ;
+    private Randomizer m_Rand;
 
     /**
      * Constructor, handles the GUI building
@@ -41,10 +42,11 @@ public class App extends JFrame {
     public App() {
 
         m_ePH = new EatingPersonsHandler();
+        m_Rand = new Randomizer();
         // Build background and set the app to a fixed size
         setTitle("Abwaschbestimmer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(300, 300, 470, 540);
+        setBounds(300, 300, 470, 600);
         setResizable(false);
         background = new JPanel();
         background.setBorder(new EmptyBorder(5,5,5,5));
@@ -119,18 +121,37 @@ public class App extends JFrame {
         sPStoredDishwashers.setBounds(255, 110, 200, 300);
         background.add(sPStoredDishwashers);
 
+        JList<String> listStoredDishWashers = new JList<String>();
+        listStoredDishWashers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        sPStoredDishwashers.setViewportView(listStoredDishWashers);
+
         // Delete the list of the oast dishwashers
         JButton btnDeleteAllStored = new JButton("Liste leeren");
         btnDeleteAllStored.setBounds(305, 415, 100, 30);
         background.add(btnDeleteAllStored);
 
+        // label of all eating persons
+        JLabel lblWinner = new JLabel();
+        lblWinner.setBounds(50, 510, 200, 20);
+        lblWinner.setVisible(false);
+        background.add(lblWinner);
+
         // Determine the next person to do the dishes
         JButton btnCrownWinner = new JButton("Gewinner bestimmen");
+        btnCrownWinner.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                m_Rand.setEatingPersons(m_ePH.getEatingPersons());
+                m_Rand.determineWinner();
+                lblWinner.setText("Heutiger Gewinner: " + m_Rand.getWinner());
+                lblWinner.setVisible(true);
+            }
+        });
         btnCrownWinner.setBounds(150, 460, 170, 30);
         background.add(btnCrownWinner);
 
         // Set the scroll pane of the eating persons to the list of EatingPersonsHandler
         listEatingPersons.setModel(m_ePH.getEatingPersons());
+        listStoredDishWashers.setModel(m_Rand.getStoredWashers());
     }
 
     public static void main(String[] args) {
