@@ -9,6 +9,10 @@ package com.codebind;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import com.codebind.EatingPersonsHandler;
 
 /**
  * This class handles the GUI buildup and runs the main app.
@@ -22,10 +26,14 @@ public class App extends JFrame {
     private JScrollPane sPEatingPersons;
     private JScrollPane sPStoredDishwashers;
 
+    private EatingPersonsHandler m_ePH ;
+
     /**
      * Constructor, handles the GUI building
      */
     public App() {
+
+        m_ePH = new EatingPersonsHandler();
         // Build background and set the app to a fixed size
         setTitle("Abwaschbestimmer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,11 +52,28 @@ public class App extends JFrame {
         // Field to add a person
         tfAddEatingPerson = new JTextField();
         tfAddEatingPerson.setBounds(15, 35, 150,30);
+        // Option to add another person by typing a text and hitting Enter
+        tfAddEatingPerson.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                m_ePH.addPerson(tfAddEatingPerson.getText());
+                tfAddEatingPerson.requestFocus();
+                // Reset text after adding
+                tfAddEatingPerson.setText("");
+            }
+        });
         background.add(tfAddEatingPerson);
         tfAddEatingPerson.setColumns(20);
 
         // Trigger person adding
         JButton btnAddName = new JButton("Hinzufügen");
+        btnAddName.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                m_ePH.addPerson(tfAddEatingPerson.getText());
+                tfAddEatingPerson.requestFocus();
+                // Rest text after adding
+                tfAddEatingPerson.setText("");
+            }
+        });
         btnAddName.setBounds(305, 35, 100, 30);
         background.add(btnAddName);
 
@@ -62,8 +87,18 @@ public class App extends JFrame {
         sPEatingPersons.setBounds(15, 110, 200, 300);
         background.add(sPEatingPersons);
 
+        JList<String> listEatingPersons = new JList<String>();
+        listEatingPersons.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        sPEatingPersons.setViewportView(listEatingPersons);
+
         // Delete the name of a single eating person
         JButton btnDeleteSingleEatingPerson = new JButton("Einzelne Person löschen");
+        btnDeleteSingleEatingPerson.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                m_ePH.removePerson(listEatingPersons.getSelectedIndex());
+                tfAddEatingPerson.requestFocus();
+            }
+        });
         btnDeleteSingleEatingPerson.setBounds(25, 415, 180, 30);
         background.add(btnDeleteSingleEatingPerson);
 
@@ -86,6 +121,9 @@ public class App extends JFrame {
         JButton btnCrownWinner = new JButton("Gewinner bestimmen");
         btnCrownWinner.setBounds(150, 460, 170, 30);
         background.add(btnCrownWinner);
+
+        // Set the scroll pane of the eating persons to the list of EatingPersonsHandler
+        listEatingPersons.setModel(m_ePH.getEatingPersons());
     }
 
     public static void main(String[] args) {
