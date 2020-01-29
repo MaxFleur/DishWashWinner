@@ -127,6 +127,11 @@ public class App extends JFrame {
 
         // Delete the list of the oast dishwashers
         JButton btnDeleteAllStored = new JButton("Liste leeren");
+        btnDeleteAllStored.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                m_Rand.clearStoredWashers();
+            }
+        });
         btnDeleteAllStored.setBounds(305, 415, 100, 30);
         background.add(btnDeleteAllStored);
 
@@ -146,7 +151,7 @@ public class App extends JFrame {
                 btnAddWinnerToStored.setVisible(false);
             }
         });
-        btnAddWinnerToStored.setBounds(260, 505, 130, 30);
+        btnAddWinnerToStored.setBounds(290, 505, 130, 30);
         btnAddWinnerToStored.setVisible(false);
         background.add(btnAddWinnerToStored);
 
