@@ -35,7 +35,7 @@ public class Randomizer {
             DefaultListModel<String> candidates = new DefaultListModel<String>();
             // If the person hasn't dishwashed yet, add it to the candidates
             for (int i = 0; i < eatingPersons.size(); i++) {
-                if (!storedWashers.contains(eatingPersons.elementAt(i))) {
+                if (!containsIgnoreCase(eatingPersons.elementAt(i), storedWashers)) {
                     candidates.addElement(eatingPersons.elementAt(i));
                 }
             }
@@ -55,12 +55,10 @@ public class Randomizer {
      * Add the winner to the stored list if his or her name is not added yet
      */
     public void addWinnerToStored(String name) {
-        if(!storedWashers.contains(name)) {
+        if(!containsIgnoreCase(name, storedWashers)) {
             storedWashers.addElement(name);
         }
     }
-
-
 
     /**
      * Clear the list of stored washers
@@ -96,5 +94,20 @@ public class Randomizer {
      */
     public void setEatingPersons(DefaultListModel<String> eatingPersons) {
         this.eatingPersons = eatingPersons;
+    }
+
+    /**
+     * This function checks if a name is in a list, regardless of uppercase or lowercase
+     * @param name The name of the person
+     * @param list List containing name of person (or not)
+     * @return if the person is in the list
+     */
+    public boolean containsIgnoreCase(String name, DefaultListModel<String> list){
+        for(int i = 0; i < list.size(); i++){
+            if(list.elementAt(i).equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
