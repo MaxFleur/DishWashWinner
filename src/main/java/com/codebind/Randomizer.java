@@ -25,15 +25,19 @@ public class Randomizer {
                     candidates.addElement(eatingPersons.elementAt(i));
                 }
             }
+            Random r = new Random();
             if(candidates.size() > 0) {
-                Random r = new Random();
                 winner = candidates.get(r.nextInt(candidates.size()));
+            } else {
+                winner = eatingPersons.get(r.nextInt(eatingPersons.size()));
             }
         }
     }
-    
+
     public void addWinnerToStored(String name) {
-        storedWashers.addElement(name);
+        if(!storedWashers.contains(name)) {
+            storedWashers.addElement(name);
+        }
     }
 
     public void clearStoredWashers() {

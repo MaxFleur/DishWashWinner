@@ -136,6 +136,18 @@ public class App extends JFrame {
         lblWinner.setVisible(false);
         background.add(lblWinner);
 
+        JButton btnAddWinnerToStored = new JButton("Speichern / OK");
+        btnAddWinnerToStored.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                m_Rand.addWinnerToStored(m_Rand.getWinner());
+                lblWinner.setVisible(false);
+                btnAddWinnerToStored.setVisible(false);
+            }
+        });
+        btnAddWinnerToStored.setBounds(260, 505, 130, 30);
+        btnAddWinnerToStored.setVisible(false);
+        background.add(btnAddWinnerToStored);
+
         // Determine the next person to do the dishes
         JButton btnCrownWinner = new JButton("Gewinner bestimmen");
         btnCrownWinner.addActionListener(new ActionListener() {
@@ -144,6 +156,7 @@ public class App extends JFrame {
                 m_Rand.determineWinner();
                 lblWinner.setText("Heutiger Gewinner: " + m_Rand.getWinner());
                 lblWinner.setVisible(true);
+                btnAddWinnerToStored.setVisible(true);
             }
         });
         btnCrownWinner.setBounds(150, 460, 170, 30);
