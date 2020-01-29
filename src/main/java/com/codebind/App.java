@@ -130,15 +130,17 @@ public class App extends JFrame {
         btnDeleteAllStored.setBounds(305, 415, 100, 30);
         background.add(btnDeleteAllStored);
 
-        // label of all eating persons
+        // label of the randomization winner, not visibile until winner is determined
         JLabel lblWinner = new JLabel();
         lblWinner.setBounds(50, 510, 200, 20);
         lblWinner.setVisible(false);
         background.add(lblWinner);
 
+        // Button to store the winner, not visible until winner is determined
         JButton btnAddWinnerToStored = new JButton("Speichern / OK");
         btnAddWinnerToStored.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
+                // Add the winner to the stored ones and reset the visibility of the label and button
                 m_Rand.addWinnerToStored(m_Rand.getWinner());
                 lblWinner.setVisible(false);
                 btnAddWinnerToStored.setVisible(false);
@@ -154,6 +156,7 @@ public class App extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 m_Rand.setEatingPersons(m_ePH.getEatingPersons());
                 m_Rand.determineWinner();
+                // Now that the winner is determined, the button and label shall become visible
                 lblWinner.setText("Heutiger Gewinner: " + m_Rand.getWinner());
                 lblWinner.setVisible(true);
                 btnAddWinnerToStored.setVisible(true);
