@@ -61,13 +61,6 @@ public class Randomizer {
     }
 
     /**
-     * Clear the list of stored washers
-     */
-    public void clearStoredWashers() {
-        storedWashers.clear();
-    }
-
-    /**
      * @return eating persons
      */
     public DefaultListModel<String> getEatingPersons() {

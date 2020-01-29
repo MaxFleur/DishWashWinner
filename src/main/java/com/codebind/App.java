@@ -20,6 +20,7 @@ import java.awt.EventQueue;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * This class handles the GUI buildup and runs the main app.
@@ -35,14 +36,16 @@ public class App extends JFrame {
 
     private EatingPersonsHandler m_ePH ;
     private Randomizer m_Rand;
+    private FileHandler m_fH;
 
     /**
      * Constructor, handles the GUI building
      */
-    public App() {
+    public App() throws IOException {
 
         m_ePH = new EatingPersonsHandler();
         m_Rand = new Randomizer();
+        m_fH = new FileHandler();
         // Build background and set the app to a fixed size
         setTitle("Abwaschbestimmer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -129,7 +132,11 @@ public class App extends JFrame {
         JButton btnDeleteAllStored = new JButton("Liste leeren");
         btnDeleteAllStored.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                m_Rand.clearStoredWashers();
+                try {
+                    m_fH.deleteNamesFromFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
         btnDeleteAllStored.setBounds(305, 415, 100, 30);
@@ -147,6 +154,12 @@ public class App extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 // Add the winner to the stored ones and reset the visibility of the label and button
                 m_Rand.addWinnerToStored(m_Rand.getWinner());
+                m_fH.getStoredNames().addElement(m_Rand.getWinner());
+                try {
+                    m_fH.writeStoredNamesToDisc();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 lblWinner.setVisible(false);
                 btnAddWinnerToStored.setVisible(false);
             }
@@ -172,7 +185,7 @@ public class App extends JFrame {
 
         // Set the scroll pane of the eating persons to the list of EatingPersonsHandler
         listEatingPersons.setModel(m_ePH.getEatingPersons());
-        listStoredDishWashers.setModel(m_Rand.getStoredWashers());
+        listStoredDishWashers.setModel(m_fH.getStoredNames());
     }
 
     public static void main(String[] args) {
