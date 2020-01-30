@@ -1,3 +1,9 @@
+/**
+ * Handle the file and it's content.
+ * Code by MaxFleur
+ * https://github.com/MaxFleur
+ */
+
 package com.codebind;
 
 import javax.swing.DefaultListModel;
