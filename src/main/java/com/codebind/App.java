@@ -128,10 +128,11 @@ public class App extends JFrame {
         listStoredDishWashers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         sPStoredDishwashers.setViewportView(listStoredDishWashers);
 
-        // Delete the list of the oast dishwashers
+        // Delete the list of the last dishwashers
         JButton btnDeleteAllStored = new JButton("Liste leeren");
         btnDeleteAllStored.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
+                // Delete from file
                 try {
                     m_fH.deleteNamesFromFile();
                 } catch (IOException e) {
@@ -152,11 +153,12 @@ public class App extends JFrame {
         JButton btnAddWinnerToStored = new JButton("Speichern / OK");
         btnAddWinnerToStored.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                // Add the winner to the stored ones and reset the visibility of the label and button
+                // Add the winner to the stored ones and write the names to the disc
+                // Then reset the visibility of the label and button
                 m_Rand.addWinnerToStored(m_Rand.getWinner());
                 m_fH.getStoredNames().addElement(m_Rand.getWinner());
                 try {
-                    m_fH.writeStoredNamesToDisc();
+                    m_fH.writeStoredNamesToFile();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
