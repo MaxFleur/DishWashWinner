@@ -89,6 +89,10 @@ public class Randomizer {
         this.eatingPersons = eatingPersons;
     }
 
+    public void setStoredWashers(DefaultListModel<String> storedWashers) {
+        this.storedWashers = storedWashers;
+    }
+
     /**
      * This function checks if a name is in a list, regardless of uppercase or lowercase
      * @param name The name of the person

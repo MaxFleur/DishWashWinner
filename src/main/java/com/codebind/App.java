@@ -46,6 +46,9 @@ public class App extends JFrame {
         m_ePH = new EatingPersonsHandler();
         m_Rand = new Randomizer();
         m_fH = new FileHandler();
+
+        m_Rand.setStoredWashers(m_fH.getStoredNames());
+
         // Build background and set the app to a fixed size
         setTitle("Abwaschbestimmer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -154,14 +157,15 @@ public class App extends JFrame {
         btnAddWinnerToStored.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 // Add the winner to the stored ones and write the names to the disc
-                // Then reset the visibility of the label and button
                 m_Rand.addWinnerToStored(m_Rand.getWinner());
-                m_fH.getStoredNames().addElement(m_Rand.getWinner());
+                m_fH.setStoredNames(m_Rand.getStoredWashers());
+
                 try {
                     m_fH.writeStoredNamesToFile();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                // Then reset the visibility of the label and button
                 lblWinner.setVisible(false);
                 btnAddWinnerToStored.setVisible(false);
             }
@@ -174,12 +178,14 @@ public class App extends JFrame {
         JButton btnCrownWinner = new JButton("Gewinner bestimmen");
         btnCrownWinner.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                m_Rand.setEatingPersons(m_ePH.getEatingPersons());
-                m_Rand.determineWinner();
-                // Now that the winner is determined, the button and label shall become visible
-                lblWinner.setText("Heutiger Gewinner: " + m_Rand.getWinner());
-                lblWinner.setVisible(true);
-                btnAddWinnerToStored.setVisible(true);
+                if(m_ePH.getEatingPersons().size() > 0) {
+                    m_Rand.setEatingPersons(m_ePH.getEatingPersons());
+                    m_Rand.determineWinner();
+                    // Now that the winner is determined, the button and label shall become visible
+                    lblWinner.setText("Heutiger Gewinner: " + m_Rand.getWinner());
+                    lblWinner.setVisible(true);
+                    btnAddWinnerToStored.setVisible(true);
+                }
             }
         });
         btnCrownWinner.setBounds(150, 460, 170, 30);

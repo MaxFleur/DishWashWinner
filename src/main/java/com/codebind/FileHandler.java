@@ -20,6 +20,8 @@ public class FileHandler {
     private String fileName;
     // The names to be stored
     private DefaultListModel<String> storedNames;
+    // Copy for showing the names
+    private DefaultListModel<String> copy;
 
     /**
      * Constructor handles file dir and the file content
@@ -29,6 +31,7 @@ public class FileHandler {
         // Use File.separator to handle both Linux and Windows
         fileName = "." + File.separator + "stored.dat";
         storedNames = new DefaultListModel<String>();
+        copy = new DefaultListModel<String>();
         // A new File to handle the stored data
         File file = new File(fileName);
         // Create the file if it's not there
@@ -40,6 +43,7 @@ public class FileHandler {
             BufferedReader in = new BufferedReader(new FileReader(fileName));
             while ((adressRow = in.readLine()) != null) {
                 storedNames.addElement(adressRow);
+                copy.addElement(adressRow);
             }
             if (in != null) {
                 in.close();
@@ -70,6 +74,7 @@ public class FileHandler {
      */
     public void deleteNamesFromFile() throws IOException {
         // Empty string and that's it
+        copy.clear();
         storedNames.clear();
         BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         out.write("");
@@ -80,6 +85,10 @@ public class FileHandler {
      * @return the stored names
      */
     public DefaultListModel<String> getStoredNames() {
-        return storedNames;
+        return copy;
+    }
+
+    public void setStoredNames(DefaultListModel<String> storedNames) {
+        this.storedNames = storedNames;
     }
 }
