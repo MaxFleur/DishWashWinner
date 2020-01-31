@@ -46,7 +46,7 @@ public class App extends JFrame {
         m_ePH = new EatingPersonsHandler();
         m_Rand = new Randomizer();
         m_fH = new FileHandler();
-
+        // Move the file content into the randomizer
         m_Rand.setStoredWashers(m_fH.getStoredNames());
 
         // Build background and set the app to a fixed size
