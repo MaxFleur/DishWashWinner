@@ -19,7 +19,9 @@ public class EatingPersonsHandler {
     // Add another person, make sure the string is not empty
     public void addPerson(String name) {
         if(!name.isEmpty()) {
-            eatingPersons.addElement(name);
+            // If the user accidentally uses whitespaces, remove all of them
+            // But don't use two or more names, they will be merged otherwise :-)
+            eatingPersons.addElement(name.replaceAll("\\s+", ""));
         }
     }
 
