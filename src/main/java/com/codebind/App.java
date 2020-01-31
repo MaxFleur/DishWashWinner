@@ -191,6 +191,11 @@ public class App extends JFrame {
         btnCrownWinner.setBounds(150, 460, 170, 30);
         background.add(btnCrownWinner);
 
+        // version label
+        JLabel lblVersion = new JLabel("v1.00");
+        lblVersion.setBounds(430, 540, 60, 20);
+        background.add(lblVersion);
+
         // Set the scroll pane of the eating persons to the list of EatingPersonsHandler
         listEatingPersons.setModel(m_ePH.getEatingPersons());
         listStoredDishWashers.setModel(m_fH.getStoredNames());
